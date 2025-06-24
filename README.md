@@ -125,4 +125,4 @@ MIT License
 ---
 
 **Contact:**  
-For demo requests, partnership, or questions, contact [your-email@example.com].
+For demo requests, partnership, or questions, contact [nexgenauction@gmail.com].
