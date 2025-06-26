@@ -1,24 +1,115 @@
-# Compiled class file
-*.class
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
 
-# Log file
-*.log
+# Testing
+/coverage
+/backend/coverage
+/frontend/coverage
 
-# BlueJ files
-*.ctxt
+# Production
+/build
+/frontend/build
+/backend/dist
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/backend/.env
+/frontend/.env
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/backend/logs
+/frontend/logs
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Malaysian Government API credentials
+malaysian-gov-api-keys.json
+jpph-credentials.json
+etanah-credentials.json
+bnm-credentials.json
+
+# Blockchain
+/backend/blockchain/keys
+/backend/blockchain/contracts/build
+
+# Cache
+.cache/
+.npm/
+
+# Temporary files
+*.tmp
+*.temp
+/temp
+/tmp
+
+# Database
+*.sqlite
+*.db
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Local Netlify folder
+.netlify
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel
+
+# Local development SSL certificates
+*.pem
+*.key
+*.crt
+
+# Property images and documents
+/uploads
+/backend/uploads
+/frontend/public/uploads

@@ -1,0 +1,14 @@
+{
+  "name": "real-estate-blockchain-mas",
+  "version": "1.0.0",
+  "description": "Real Estate Blockchain Powered with Multi-Agent System for Malaysian Market",
+  "scripts": {
+    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
