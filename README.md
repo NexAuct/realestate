@@ -111,7 +111,7 @@ LHDN_API_KEY=your-lhdn-key
 
 ## 📊 System Architecture
 
-```
+```mermaid
 flowchart TB
     %% Frontend Applications
     MobileApp["Mobile App<br/>(React Native)"]
