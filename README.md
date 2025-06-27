@@ -112,27 +112,28 @@ LHDN_API_KEY=your-lhdn-key
 ## 📊 System Architecture
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Mobile App    │    │   Web Portal    │    │  Admin Panel    │
-│  (React Native) │    │    (React)      │    │    (React)      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-┌─────────────────────────────────────────────────────────────────┐
-│                    API Gateway (Express.js)                     │
-└─────────────────────────────────────────────────────────────────┘
-         │                       │                       │
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Multi-Agent    │    │   Blockchain    │    │  Gov APIs       │
-│    System       │    │   Integration   │    │  Integration    │
-│                 │    │                 │    │                 │
-│ • AuctioneerAgent│    │ • Smart Contract│    │ • e-Tanah       │
-│ • BidderAgent   │    │ • Web3 Provider │    │ • JPPH          │
-│ • ComplianceAgent│    │ • Event Logs    │    │ • BNM           │
-│ • ValuationAgent│    │ • Token Mgmt    │    │ • LHDN          │
-│ • FraudDetection│    │                 │    │ • e-Lelong      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+flowchart TB
+    %% Frontend Applications
+    MobileApp["Mobile App<br/>(React Native)"]
+    WebPortal["Web Portal<br/>(React)"]
+    AdminPanel["Admin Panel<br/>(React)"]
+
+    %% Connecting to API Gateway
+    MobileApp --> APIGateway
+    WebPortal --> APIGateway
+    AdminPanel --> APIGateway
+
+    %% API Gateway
+    APIGateway["API Gateway<br/>(Express.js)"]
+
+    %% Backend Systems
+    MultiAgent["Multi-Agent System<br/>• AuctioneerAgent<br/>• BidderAgent<br/>• ComplianceAgent<br/>• ValuationAgent<br/>• FraudDetection"]
+    Blockchain["Blockchain Integration<br/>• Smart Contract<br/>• Web3 Provider<br/>• Event Logs<br/>• Token Mgmt"]
+    GovAPIs["Gov APIs Integration<br/>• e-Tanah<br/>• JPPH<br/>• BNM<br/>• LHDN<br/>• e-Lelong"]
+
+    APIGateway --> MultiAgent
+    APIGateway --> Blockchain
+    APIGateway --> GovAPIs
 ```
 
 ## 🔧 Development Commands
