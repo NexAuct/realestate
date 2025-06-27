@@ -39,12 +39,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme }) => {
   const { t } = useLanguage();
 
   const navItems = [
-    { labelKey: 'nav.home', path: '/' },
-    { labelKey: 'nav.properties', path: '/properties' },
-    { labelKey: 'nav.agents', path: '/agents' },
-    { labelKey: 'nav.about', path: '/about' },
-    { labelKey: 'nav.blog', path: '/blog' },
-    { labelKey: 'nav.contact', path: '/contact' },
+    { labelKey: 'Home', path: '/' },
+    { labelKey: 'Properties Marketplace', path: '/properties' },
+    { labelKey: 'Auctions', path: '/auctions' },
+    { labelKey: 'Agents', path: '/agents' },
+    { labelKey: 'About', path: '/about' },
+    { labelKey: 'Blog', path: '/blog' },
+    { labelKey: 'Contact', path: '/contact' },
   ];
 
   const handleDrawerToggle = () => {

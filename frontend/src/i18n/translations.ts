@@ -4,6 +4,9 @@ export interface Translation {
 
 export const translations: Record<'en' | 'bm', Translation> = {
   en: {
+    brand: {
+      name: 'MyRealEstate'
+    },
     common: {
       search: 'Search',
       filter: 'Filter',
@@ -116,6 +119,9 @@ export const translations: Record<'en' | 'bm', Translation> = {
     }
   },
   bm: {
+    brand: {
+      name: 'MyRealEstate'
+    },
     common: {
       search: 'Cari',
       filter: 'Tapis',

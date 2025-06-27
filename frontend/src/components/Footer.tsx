@@ -15,6 +15,7 @@ const Footer: React.FC = () => {
         { text: 'Sell Properties', href: '/contact' },
         { text: 'Property Management', href: '/contact' },
         { text: 'Investment Advice', href: '/agents' },
+        { text: 'Auction / e-Lelong', href: '/agents' },
       ],
     },
     {
@@ -88,21 +89,21 @@ const Footer: React.FC = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <LocationOn sx={{ mr: 1, fontSize: 'small' }} />
                 <Typography variant="body2" color="text.secondary">
-                  123 Real Estate Street, City, Country
+                  123, Jalan Real Estate, Kuala Lumpur City, Malaysia
                 </Typography>
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                 <Phone sx={{ mr: 1, fontSize: 'small' }} />
                 <Typography variant="body2" color="text.secondary">
-                  +1 (555) 123-4567
+                  +60 123 456 789
                 </Typography>
               </Box>
               
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Email sx={{ mr: 1, fontSize: 'small' }} />
                 <Typography variant="body2" color="text.secondary">
-                  contact@realestate.com
+                  contact@myrealestate.com
                 </Typography>
               </Box>
             </Grid>
@@ -159,7 +160,7 @@ const Footer: React.FC = () => {
               color="text.secondary"
               sx={{ mb: { xs: 2, sm: 0 } }}
             >
-              © {currentYear} RealEstate. All rights reserved.
+              © {currentYear} MyRealEstate. All rights reserved.
             </Typography>
 
             <Box sx={{ display: 'flex', gap: 1 }}>
