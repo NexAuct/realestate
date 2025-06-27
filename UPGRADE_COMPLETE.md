@@ -160,23 +160,26 @@ Performance Monitoring
 ```
 
 ## 📁 Project Structure
-```
-frontend/src/
-├── components/
-│   ├── common/          # Reusable UI components
-│   ├── property/        # Property-specific components
-│   ├── auction/         # Auction functionality
-│   ├── compliance/      # KYC, AML components
-│   ├── payment/         # Payment gateways
-│   ├── dashboard/       # Admin interfaces
-│   ├── mobile/          # Mobile-optimized components
-│   └── layout/          # Navigation, Footer
-├── contexts/            # React contexts
-├── hooks/               # Custom hooks
-├── services/            # API services
-├── utils/               # Utility functions
-├── pages/               # Route components
-└── styles/              # Themes, animations
+```mermaid
+flowchart TD
+    src["📁 src/"]
+
+    src --> components["📁 components/"]
+    components --> common["📁 common/"]
+    components --> property["📁 property/"]
+    components --> auction["📁 auction/"]
+    components --> compliance["📁 compliance/"]
+    components --> payment["📁 payment/"]
+    components --> dashboard["📁 dashboard/"]
+    components --> mobile["📁 mobile/"]
+    components --> layout["📁 layout/"]
+
+    src --> contexts["📁 contexts/"]
+    src --> hooks["📁 hooks/"]
+    src --> services["📁 services/"]
+    src --> utils["📁 utils/"]
+    src --> pages["📁 pages/"]
+    src --> styles["📁 styles/"]
 ```
 
 ## 🎯 Malaysian Compliance Features
