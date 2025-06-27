@@ -64,3 +64,9 @@ export interface BlogPost {
   image: string;
   readTime: string;
 }
+
+export interface DocumentationLink {
+  title: string;
+  url: string;
+  category: 'API' | 'Guides' | 'Examples';
+}

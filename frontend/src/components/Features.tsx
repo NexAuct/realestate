@@ -53,7 +53,7 @@ const Features: React.FC = () => {
 
           <Grid container spacing={4}>
             {features.map((feature, index) => (
-              <Grid key={index} size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid key={index} item xs={12} sm={6} md={3}>
                 <motion.div
                   variants={featureCardVariants}
                   whileHover="hover"

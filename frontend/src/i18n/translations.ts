@@ -2,64 +2,78 @@ export interface Translation {
   [key: string]: string | Translation;
 }
 
-export const translations: { [key: string]: Translation } = {
+export const translations: Record<'en' | 'bm', Translation> = {
   en: {
-    brand: {
-      name: 'RealEstate Malaysia'
-    },
-    nav: {
-      home: 'Home',
-      properties: 'Properties',
-      agents: 'Agents',
-      about: 'About',
-      blog: 'Blog',
-      contact: 'Contact'
-    },
     common: {
       search: 'Search',
       filter: 'Filter',
-      sort: 'Sort',
+      reset: 'Reset',
       submit: 'Submit',
       cancel: 'Cancel',
       save: 'Save',
       edit: 'Edit',
       delete: 'Delete',
+      view: 'View',
       loading: 'Loading...',
-      error: 'An error occurred',
+      error: 'Error occurred',
       success: 'Success',
-      viewMore: 'View More',
-      back: 'Back',
-      next: 'Next',
-      previous: 'Previous',
       any: 'Any'
     },
+    navigation: {
+      home: 'Home',
+      properties: 'Properties',
+      auctions: 'Auctions',
+      agents: 'Agents',
+      about: 'About',
+      contact: 'Contact',
+      login: 'Login',
+      register: 'Register',
+      dashboard: 'Dashboard'
+    },
+    auction: {
+      title: 'Property Auctions',
+      liveAuction: 'Live Auction',
+      currentBid: 'Current Bid',
+      reservePrice: 'Reserve Price',
+      timeRemaining: 'Time Remaining',
+      placeBid: 'Place Bid',
+      bidAmount: 'Bid Amount',
+      bidHistory: 'Bid History',
+      totalBidders: 'Total Bidders',
+      auctionEnded: 'Auction Ended',
+      winner: 'Winner',
+      loading: 'Loading auction data...',
+      connected: 'Connected to live auction',
+      disconnected: 'Connection lost',
+      bidTooLow: 'Bid amount must be higher than current bid',
+      kycPending: 'KYC verification pending',
+      bidderBlocked: 'Bidder account blocked',
+      verified: 'Verified',
+      auctionTypes: {
+        lelong: 'Lelong',
+        distressed: 'Distressed Property',
+        government: 'Government Auction',
+        bank: 'Bank Auction'
+      }
+    },
     property: {
-      title: 'Title',
-      description: 'Description',
-      price: 'Price',
-      location: 'Location',
+      search: {
+        title: 'Property Search',
+        advancedFilters: 'Advanced Filters',
+        specialTypes: 'Special Property Types'
+      },
       type: 'Property Type',
-      status: 'Status',
-      features: 'Features',
-      amenities: 'Amenities',
       landTitle: 'Land Title',
       bedrooms: 'Bedrooms',
       bathrooms: 'Bathrooms',
+      price: 'Price',
+      priceRange: 'Price Range',
+      location: 'Location',
+      description: 'Description',
+      features: 'Features',
       rizabMelayu: 'Rizab Melayu',
       rumahMampuMilik: 'Rumah Mampu Milik',
       auction: 'Auction Property',
-      search: {
-        title: 'Search Properties',
-        advancedFilters: 'Advanced Filters',
-        specialTypes: 'Special Property Types',
-        priceRange: 'Price Range'
-      },
-      landTitleTypes: {
-        GERAN: 'Geran',
-        HAKMILIK_SEMENTARA: 'Hakmilik Sementara',
-        PAJAKAN: 'Pajakan',
-        RIZAB_MELAYU: 'Rizab Melayu'
-      },
       propertyTypes: {
         RESIDENTIAL: 'Residential',
         COMMERCIAL: 'Commercial',
@@ -67,107 +81,111 @@ export const translations: { [key: string]: Translation } = {
         AGRICULTURAL: 'Agricultural',
         DEVELOPMENT_LAND: 'Development Land'
       },
-      propertyStatus: {
-        AVAILABLE: 'Available',
-        UNDER_CONTRACT: 'Under Contract',
-        SOLD: 'Sold',
-        AUCTION: 'Auction',
-        RUMAH_MAMPU_MILIK: 'Rumah Mampu Milik'
+      landTitleTypes: {
+        GERAN: 'Geran',
+        HAKMILIK_SEMENTARA: 'Hakmilik Sementara',
+        PAJAKAN: 'Pajakan',
+        RIZAB_MELAYU: 'Rizab Melayu'
       }
     },
     location: {
       state: 'State',
       district: 'District',
       mukim: 'Mukim',
-      postalCode: 'Postal Code',
-      lot: 'Lot Number',
-      section: 'Section',
-      townArea: 'Town Area'
+      address: 'Address'
     },
     financial: {
-      marketValue: 'Market Value',
+      priceRange: 'Price Range',
+      downPayment: 'Down Payment',
+      monthlyPayment: 'Monthly Payment',
+      loanAmount: 'Loan Amount',
+      interestRate: 'Interest Rate',
+      loanTerm: 'Loan Term',
+      rpgt: 'RPGT',
       stampDuty: 'Stamp Duty',
-      legalFees: 'Legal Fees',
-      rpgt: 'Real Property Gains Tax',
-      maintenanceFee: 'Maintenance Fee',
-      assessmentTax: 'Assessment Tax',
-      quitRent: 'Quit Rent',
-      priceRange: 'Price Range'
+      legalFees: 'Legal Fees'
     },
-    legal: {
-      caveats: 'Caveats',
-      encumbrances: 'Encumbrances',
-      restrictions: 'Restrictions',
-      titleSearch: 'Title Search',
-      spAgreement: 'Sale & Purchase Agreement',
-      loanAgreement: 'Loan Agreement'
-    },
-    payment: {
-      duitNow: 'DuitNow',
-      fpx: 'FPX',
-      bankTransfer: 'Bank Transfer',
-      deposit: 'Deposit',
-      balance: 'Balance',
-      escrow: 'Escrow'
+    compliance: {
+      kycVerification: 'KYC Verification',
+      amlCheck: 'AML Check',
+      titleVerification: 'Title Verification',
+      complianceStatus: 'Compliance Status',
+      approved: 'Approved',
+      pending: 'Pending',
+      rejected: 'Rejected'
     }
   },
   bm: {
-    brand: {
-      name: 'RealEstate Malaysia'
-    },
-    nav: {
-      home: 'Laman Utama',
-      properties: 'Hartanah',
-      agents: 'Ejen',
-      about: 'Tentang Kami',
-      blog: 'Blog',
-      contact: 'Hubungi'
-    },
     common: {
       search: 'Cari',
       filter: 'Tapis',
-      sort: 'Susun',
+      reset: 'Set Semula',
       submit: 'Hantar',
       cancel: 'Batal',
       save: 'Simpan',
-      edit: 'Sunting',
+      edit: 'Edit',
       delete: 'Padam',
-      loading: 'Sedang dimuatkan...',
-      error: 'Ralat telah berlaku',
+      view: 'Lihat',
+      loading: 'Memuatkan...',
+      error: 'Ralat berlaku',
       success: 'Berjaya',
-      viewMore: 'Lihat Lagi',
-      back: 'Kembali',
-      next: 'Seterusnya',
-      previous: 'Sebelumnya',
-      any: 'Semua'
+      any: 'Mana-mana'
+    },
+    navigation: {
+      home: 'Utama',
+      properties: 'Hartanah',
+      auctions: 'Lelongan',
+      agents: 'Ejen',
+      about: 'Tentang',
+      contact: 'Hubungi',
+      login: 'Log Masuk',
+      register: 'Daftar',
+      dashboard: 'Papan Pemuka'
+    },
+    auction: {
+      title: 'Lelongan Hartanah',
+      liveAuction: 'Lelongan Langsung',
+      currentBid: 'Bida Semasa',
+      reservePrice: 'Harga Rizab',
+      timeRemaining: 'Masa Berbaki',
+      placeBid: 'Buat Bidaan',
+      bidAmount: 'Jumlah Bidaan',
+      bidHistory: 'Sejarah Bidaan',
+      totalBidders: 'Jumlah Pembida',
+      auctionEnded: 'Lelongan Tamat',
+      winner: 'Pemenang',
+      loading: 'Memuatkan data lelongan...',
+      connected: 'Disambungkan ke lelongan langsung',
+      disconnected: 'Sambungan terputus',
+      bidTooLow: 'Jumlah bidaan mesti lebih tinggi daripada bidaan semasa',
+      kycPending: 'Pengesahan KYC dalam proses',
+      bidderBlocked: 'Akaun pembida disekat',
+      verified: 'Disahkan',
+      auctionTypes: {
+        lelong: 'Lelong',
+        distressed: 'Hartanah Bermasalah',
+        government: 'Lelongan Kerajaan',
+        bank: 'Lelongan Bank'
+      }
     },
     property: {
-      title: 'Tajuk',
-      description: 'Penerangan',
-      price: 'Harga',
-      location: 'Lokasi',
+      search: {
+        title: 'Carian Hartanah',
+        advancedFilters: 'Penapis Lanjutan',
+        specialTypes: 'Jenis Hartanah Khas'
+      },
       type: 'Jenis Hartanah',
-      status: 'Status',
-      features: 'Ciri-ciri',
-      amenities: 'Kemudahan',
       landTitle: 'Hakmilik Tanah',
       bedrooms: 'Bilik Tidur',
       bathrooms: 'Bilik Air',
+      price: 'Harga',
+      priceRange: 'Julat Harga',
+      location: 'Lokasi',
+      description: 'Penerangan',
+      features: 'Ciri-ciri',
       rizabMelayu: 'Rizab Melayu',
       rumahMampuMilik: 'Rumah Mampu Milik',
-      auction: 'Hartanah Lelong',
-      search: {
-        title: 'Cari Hartanah',
-        advancedFilters: 'Penapis Lanjutan',
-        specialTypes: 'Jenis Hartanah Khas',
-        priceRange: 'Julat Harga'
-      },
-      landTitleTypes: {
-        GERAN: 'Geran',
-        HAKMILIK_SEMENTARA: 'Hakmilik Sementara',
-        PAJAKAN: 'Pajakan',
-        RIZAB_MELAYU: 'Rizab Melayu'
-      },
+      auction: 'Hartanah Lelongan',
       propertyTypes: {
         RESIDENTIAL: 'Kediaman',
         COMMERCIAL: 'Komersial',
@@ -175,48 +193,38 @@ export const translations: { [key: string]: Translation } = {
         AGRICULTURAL: 'Pertanian',
         DEVELOPMENT_LAND: 'Tanah Pembangunan'
       },
-      propertyStatus: {
-        AVAILABLE: 'Tersedia',
-        UNDER_CONTRACT: 'Dalam Kontrak',
-        SOLD: 'Terjual',
-        AUCTION: 'Lelong',
-        RUMAH_MAMPU_MILIK: 'Rumah Mampu Milik'
+      landTitleTypes: {
+        GERAN: 'Geran',
+        HAKMILIK_SEMENTARA: 'Hakmilik Sementara',
+        PAJAKAN: 'Pajakan',
+        RIZAB_MELAYU: 'Rizab Melayu'
       }
     },
     location: {
       state: 'Negeri',
       district: 'Daerah',
       mukim: 'Mukim',
-      postalCode: 'Poskod',
-      lot: 'Nombor Lot',
-      section: 'Seksyen',
-      townArea: 'Kawasan Bandar'
+      address: 'Alamat'
     },
     financial: {
-      marketValue: 'Nilai Pasaran',
+      priceRange: 'Julat Harga',
+      downPayment: 'Wang Pendahuluan',
+      monthlyPayment: 'Bayaran Bulanan',
+      loanAmount: 'Jumlah Pinjaman',
+      interestRate: 'Kadar Faedah',
+      loanTerm: 'Tempoh Pinjaman',
+      rpgt: 'RPGT',
       stampDuty: 'Duti Setem',
-      legalFees: 'Yuran Guaman',
-      rpgt: 'Cukai Keuntungan Harta Tanah',
-      maintenanceFee: 'Yuran Penyelenggaraan',
-      assessmentTax: 'Cukai Taksiran',
-      quitRent: 'Cukai Tanah',
-      priceRange: 'Julat Harga'
+      legalFees: 'Yuran Guaman'
     },
-    legal: {
-      caveats: 'Kaveat',
-      encumbrances: 'Bebanan',
-      restrictions: 'Sekatan',
-      titleSearch: 'Carian Hakmilik',
-      spAgreement: 'Perjanjian Jual Beli',
-      loanAgreement: 'Perjanjian Pinjaman'
-    },
-    payment: {
-      duitNow: 'DuitNow',
-      fpx: 'FPX',
-      bankTransfer: 'Pindahan Bank',
-      deposit: 'Deposit',
-      balance: 'Baki',
-      escrow: 'Eskrow'
+    compliance: {
+      kycVerification: 'Pengesahan KYC',
+      amlCheck: 'Semakan AML',
+      titleVerification: 'Pengesahan Hakmilik',
+      complianceStatus: 'Status Pematuhan',
+      approved: 'Diluluskan',
+      pending: 'Dalam Proses',
+      rejected: 'Ditolak'
     }
   }
 };

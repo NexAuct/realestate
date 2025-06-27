@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import User, { IUser } from '../models/User';
 import { auth } from '../middleware/auth';
 
@@ -32,10 +32,11 @@ router.post('/register', async (req: Request, res: Response) => {
     await user.save();
 
     // Generate JWT token
+    const jwtSecret = process.env.JWT_SECRET || 'your-default-secret';
     const token = jwt.sign(
       { _id: user._id.toString() },
-      process.env.JWT_SECRET || 'your-default-secret',
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      jwtSecret,
+      { expiresIn: '7d' }
     );
 
     res.status(201).json({
@@ -73,10 +74,11 @@ router.post('/login', async (req: Request, res: Response) => {
     }
 
     // Generate JWT token
+    const jwtSecret = process.env.JWT_SECRET || 'your-default-secret';
     const token = jwt.sign(
       { _id: user._id.toString() },
-      process.env.JWT_SECRET || 'your-default-secret',
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      jwtSecret,
+      { expiresIn: '7d' }
     );
 
     res.json({

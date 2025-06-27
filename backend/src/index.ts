@@ -7,6 +7,8 @@ import connectDB from './config/database';
 import authRoutes from './routes/auth';
 import propertyRoutes from './routes/property';
 import blockchainRoutes from './routes/blockchain';
+import auctionRoutes from './routes/auction';
+import complianceRoutes from './routes/compliance';
 
 // Load environment variables
 dotenv.config();
@@ -31,6 +33,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/blockchain', blockchainRoutes);
+app.use('/api/auction', auctionRoutes);
+app.use('/api/compliance', complianceRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {

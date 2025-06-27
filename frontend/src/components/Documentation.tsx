@@ -106,7 +106,7 @@ const Documentation: React.FC = () => {
               );
 
               return (
-                <Grid key={category} size={{ xs: 12, md: 4 }}>
+                <Grid key={category} item xs={12} md={4}>
                   <motion.div variants={slideUp}>
                     <Card
                       sx={{
