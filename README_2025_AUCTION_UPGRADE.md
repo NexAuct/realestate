@@ -5,6 +5,30 @@ Comprehensive upgrade focusing on Malaysian auction property market with AI-powe
 
 ## 🏛️ 2025 Malaysian Regulatory Compliance
 
+```mermaid
+timeline
+    title 2025 Upgrade Overview for Malaysian Auction Property Market
+
+    section Strategic Focus
+        Q1 : AI-powered Multi-Agent System
+           : Bilingual, mobile-first UX
+           : Focus on Malaysian auction property market
+
+    section Regulatory Compliance (LHDN & BNM)
+        Q2 : Automated RPGT calculation
+           : Distressed property tax exemptions
+           : Digital audit trails for tax compliance
+        Q3 : Enhanced KYC for high-risk bidders
+           : Real-time transaction monitoring
+           : Automated suspicious activity reporting
+
+    section Digital Integrations
+        Q4 : e-Tanah system integration
+           : e-Consent digital title transfer
+           : e-Stamp duty automation
+           : Digital S&P templates
+```
+
 ### LHDN Updates (RPGT)
 - ✅ Automated RPGT calculation for auction properties
 - ✅ Distressed property tax exemptions
@@ -23,6 +47,37 @@ Comprehensive upgrade focusing on Malaysian auction property market with AI-powe
 
 ## 🤖 AI-Powered Multi-Agent System
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant AuctioneerAgent
+    participant BidderAgent
+    participant ComplianceAgent
+    participant ValuationAgent
+    participant FraudDetectionAgent
+    participant NegotiationService
+    participant FraudDetectionService
+    participant MarketAnalysisService
+
+    User->>System: Start auction bidding
+    System->>AuctioneerAgent: Manage bidding process
+    AuctioneerAgent->>BidderAgent: Invite AI bidders
+    BidderAgent->>NegotiationService: Generate BM/EN negotiation dialogs
+    BidderAgent-->>AuctioneerAgent: Submit AI-generated bids
+    AuctioneerAgent->>ComplianceAgent: Check AML/KYC and RPGT compliance
+    ComplianceAgent-->>AuctioneerAgent: Compliance status
+    AuctioneerAgent->>ValuationAgent: Request real-time valuation
+    ValuationAgent->>MarketAnalysisService: Get market trends
+    MarketAnalysisService-->>ValuationAgent: Trend data
+    ValuationAgent-->>AuctioneerAgent: Valuation data
+    AuctioneerAgent->>FraudDetectionAgent: Monitor suspicious patterns
+    FraudDetectionAgent->>FraudDetectionService: Check price anomalies & title verification
+    FraudDetectionService-->>FraudDetectionAgent: Risk report
+    FraudDetectionAgent-->>AuctioneerAgent: Fraud check result
+    AuctioneerAgent-->>System: Final auction result
+    System-->>User: Display auction outcome & AI insights
+```
 ### Core Agents
 - **AuctioneerAgent**: Manages bidding process and compliance
 - **BidderAgent**: Represents individual bidders with AI behavior
