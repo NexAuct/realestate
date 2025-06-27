@@ -130,7 +130,7 @@ const CallToAction: React.FC = () => {
                       <Box>
                         <Typography variant="subtitle2">Call Us</Typography>
                         <Typography variant="body2" color="text.secondary">
-                          +1 (555) 123-4567
+                          +60 123 456 789
                         </Typography>
                       </Box>
                     </Box>
@@ -140,7 +140,7 @@ const CallToAction: React.FC = () => {
                       <Box>
                         <Typography variant="subtitle2">Email Us</Typography>
                         <Typography variant="body2" color="text.secondary">
-                          contact@realestate.com
+                          contact@myrealestate.com
                         </Typography>
                       </Box>
                     </Box>

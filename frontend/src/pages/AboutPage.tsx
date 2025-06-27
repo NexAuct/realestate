@@ -88,9 +88,9 @@ const AboutPage: React.FC = () => {
                 Our Story
               </Typography>
               <Typography paragraph>
-                Founded in 2008, our real estate company has been at the forefront of 
-                property sales and rentals in the region. What started as a small family 
-                business has grown into one of the most trusted names in real estate.
+                Established in 2025, our real estate company began as a humble family venture and has since evolved
+                into a leading and trusted name in property sales and rentals across the region. 
+                built on integrity and personalized service, we continue to set the benchmark in the industry.
               </Typography>
               <Typography paragraph>
                 We believe that finding the perfect home is more than just a transaction—
