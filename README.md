@@ -74,6 +74,90 @@ Comprehensive blockchain-powered platform with AI Multi-Agent System specificall
 - **Penang**: Hybrid bidding systems
 - **Kuala Lumpur**: High-value property auctions
 
+### Real Estate Blockchain + MAS 2025 Workflows
+
+```mermaid
+flowchart TD
+
+    subgraph UI["Frontend Interfaces"]
+        MobileApp["📱 Mobile App\n(React Native)"]
+        WebPortal["💻 Web Portal\n(React)"]
+        AdminPanel["🛠️ Admin Panel\n(React)"]
+    end
+
+    subgraph Gateway["🌐 API Gateway\n(Express.js)"]
+    end
+
+    subgraph MAS["🤖 Multi-Agent System"]
+        Auctioneer["🏛️ AuctioneerAgent"]
+        Bidder["👤 BidderAgent"]
+        Compliance["⚖️ ComplianceAgent"]
+        Valuation["💰 ValuationAgent"]
+        Fraud["🔍 FraudDetectionAgent"]
+    end
+
+    subgraph Chain["⛓️ Blockchain Integration"]
+        Contract["📝 Smart Contract"]
+        Web3["🌐 Web3 Provider"]
+        Logs["📜 Event Logs"]
+        Token["🔐 Token Management"]
+    end
+
+    subgraph Gov["🏛️ Government API Integrations"]
+        eTanah["📄 e-Tanah"]
+        JPPH["📊 JPPH"]
+        BNM["🏦 BNM"]
+        LHDN["💸 LHDN"]
+        eLelong["📣 e-Lelong"]
+    end
+
+    UI --> Gateway
+    Gateway --> MAS
+    Gateway --> Chain
+    Gateway --> Gov
+
+    subgraph Dev["🧪 Developer Workflow"]
+        Clone["📥 Clone Repo"]
+        Install["📦 Install Dependencies"]
+        DevEnv["🧩 Start Dev Environment"]
+        Agents["🤖 Start MAS"]
+        Contracts["📝 Deploy Contracts"]
+        BuildTest["🛠️ Build & Test"]
+    end
+
+    Dev --> Clone --> Install --> DevEnv --> Gateway
+    DevEnv --> Agents
+    DevEnv --> Contracts
+    Dev --> BuildTest
+
+    subgraph Legal["⚖️ Regulatory Framework"]
+        DSA["🖋️ Digital Signature Act"]
+        ECA["📑 Electronic Commerce Act"]
+        RPGT["📄 RPGT 2025"]
+        Strata["🏢 Strata Titles Act"]
+    end
+
+    Legal --> Compliance
+    Legal --> Gov
+
+    subgraph Payment["💳 Payment Integration"]
+        DuitNow["📲 DuitNow QR"]
+        FPX["🏦 FPX"]
+        Maybank["💰 Maybank2u"]
+        CIMB["💳 CIMB Clicks"]
+        Escrow["🔐 Smart Contract Escrow"]
+    end
+
+    Payment --> Chain
+    WebPortal --> Payment
+    MobileApp --> Payment
+
+    classDef system fill:#f9f,stroke:#333,stroke-width:2px;
+    class MobileApp,WebPortal,AdminPanel,Gov,MAS,Chain,Payment system;
+```
+
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -212,9 +296,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Email**: support@realestate-blockchain-mas.my
+- **Email**: support@realestate-xxxxxxxxxx-xxx.xx
 - **Telegram**: @RealEstateBlockchainMY
-- **Documentation**: [docs.realestate-blockchain-mas.my](https://docs.realestate-blockchain-mas.my)
+- **Documentation**: [docs.realestate-xxxxxxxxxx-xxx.xx](https://docs.realestate-xxxxxxx.xxx.xx)
 - **Issues**: [GitHub Issues](https://github.com/your-org/real-estate-blockchain-mas-2025/issues)
 
 ---
