@@ -133,6 +133,51 @@ sequenceDiagram
 
 ## 💰 Payment Integration
 
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant DuitNow
+    participant FPX
+    participant CIMB
+    participant Maybank
+    participant PublicBank
+    participant HongLeong
+    participant AI_Engine
+
+    User->>System: Initiate payment
+    alt Choose DuitNow
+        System->>DuitNow: Generate QR Code
+        DuitNow-->>System: Payment confirmation
+    else Choose FPX
+        System->>FPX: Bank selection & redirect
+        FPX-->>System: Payment confirmation
+    end
+
+    par Bank integrations
+        System->>CIMB: Direct API call
+        System->>Maybank: Payment processing
+        System->>PublicBank: Loan/payment handling
+        System->>HongLeong: Transaction processing
+    end
+
+    System-->>User: Show payment success & receipt
+
+    Note over User,AI_Engine: 🤖 AI features triggered after payment
+
+    System->>AI_Engine: Start negotiation assistant
+    AI_Engine-->>System: Price recommendations & bilingual scripts
+
+    System->>AI_Engine: Run fraud detection
+    AI_Engine-->>System: Risk report (title verification, price anomaly, AML compliance)
+
+    System->>AI_Engine: Get market intelligence
+    AI_Engine-->>System: Regional trends & demand prediction
+
+    System-->>User: Show AI-assisted insights
+```
+
 ### DuitNow
 - **QR Code Payments**: Generate and process QR payments
 - **Bank Transfer**: Direct account-to-account transfers
