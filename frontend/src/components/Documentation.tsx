@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, Link } from '@mui/material';
+import { Box, Container, Typography, Grid, Card, CardContent, Link, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { 
   Code, 
@@ -201,45 +201,29 @@ const Documentation: React.FC = () => {
                 or join our community for support.
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 3 }}>
-                <Link
-                  href="/docs"
+                <Button
+                  variant="contained"
+                  startIcon={<Code />}
+                  onClick={() => window.open('/docs', '_self')}
                   sx={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
                     px: 3,
                     py: 1.5,
-                    backgroundColor: 'primary.main',
-                    color: 'white',
                     borderRadius: 2,
-                    textDecoration: 'none',
-                    '&:hover': {
-                      backgroundColor: 'primary.dark',
-                    },
                   }}
                 >
-                  <Code sx={{ mr: 1 }} />
                   View All Docs
-                </Link>
-                <Link
-                  href="/community"
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => window.open('/contact', '_self')}
                   sx={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
                     px: 3,
                     py: 1.5,
-                    border: 1,
-                    borderColor: 'primary.main',
-                    color: 'primary.main',
                     borderRadius: 2,
-                    textDecoration: 'none',
-                    '&:hover': {
-                      backgroundColor: 'primary.main',
-                      color: 'white',
-                    },
                   }}
                 >
                   Join Community
-                </Link>
+                </Button>
               </Box>
             </Box>
           </motion.div>

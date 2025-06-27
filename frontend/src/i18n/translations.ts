@@ -52,11 +52,21 @@ export const translations: Record<'en' | 'bm', Translation> = {
       kycPending: 'KYC verification pending',
       bidderBlocked: 'Bidder account blocked',
       verified: 'Verified',
+      searchResults: 'Search Results',
+      noResults: 'No auctions found',
+      tryDifferentFilters: 'Try adjusting your filters',
+      joinAuction: 'Join Auction',
+      search: {
+        title: 'Auction Search'
+      },
       auctionTypes: {
         lelong: 'Lelong',
         distressed: 'Distressed Property',
         government: 'Government Auction',
-        bank: 'Bank Auction'
+        bank: 'Bank Auction',
+        bank_auction: 'Bank Auction',
+        government_auction: 'Government Auction',
+        distressed_property: 'Distressed Property'
       }
     },
     property: {
@@ -167,11 +177,21 @@ export const translations: Record<'en' | 'bm', Translation> = {
       kycPending: 'Pengesahan KYC dalam proses',
       bidderBlocked: 'Akaun pembida disekat',
       verified: 'Disahkan',
+      searchResults: 'Hasil Carian',
+      noResults: 'Tiada lelongan dijumpai',
+      tryDifferentFilters: 'Cuba laraskan penapis anda',
+      joinAuction: 'Sertai Lelongan',
+      search: {
+        title: 'Carian Lelongan'
+      },
       auctionTypes: {
         lelong: 'Lelong',
         distressed: 'Hartanah Bermasalah',
         government: 'Lelongan Kerajaan',
-        bank: 'Lelongan Bank'
+        bank: 'Lelongan Bank',
+        bank_auction: 'Lelongan Bank',
+        government_auction: 'Lelongan Kerajaan',
+        distressed_property: 'Hartanah Bermasalah'
       }
     },
     property: {

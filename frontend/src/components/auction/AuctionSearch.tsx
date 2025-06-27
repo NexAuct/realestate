@@ -113,7 +113,8 @@ const AuctionSearch: React.FC = () => {
   ];
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat(language === 'bm' ? 'ms-MY' : 'en-MY', {
+    const locale = language === 'bm' ? 'ms-MY' : 'en-MY';
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: 'MYR',
       minimumFractionDigits: 0

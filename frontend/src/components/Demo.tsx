@@ -170,6 +170,7 @@ const Demo: React.FC = () => {
                     variant="contained"
                     startIcon={<PlayArrow />}
                     size="large"
+                    onClick={() => window.open('/demo', '_blank')}
                   >
                     Try Live Demo
                   </Button>
@@ -177,6 +178,7 @@ const Demo: React.FC = () => {
                     variant="outlined"
                     startIcon={<Refresh />}
                     size="large"
+                    onClick={() => setCurrentDemo(0)}
                   >
                     Reset Demo
                   </Button>

@@ -6,10 +6,16 @@ export interface IUser extends Document {
   password: string;
   name: string;
   role: 'buyer' | 'seller' | 'agent' | 'admin';
+  roles: mongoose.Types.ObjectId[];
+  permissions: string[];
   walletAddress?: string;
+  isActive: boolean;
+  lastLogin?: Date;
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
+  hasPermission(permission: string): boolean;
+  hasRole(roleName: string): Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema({
@@ -39,7 +45,11 @@ const UserSchema: Schema = new Schema({
     type: String,
     unique: true,
     sparse: true
-  }
+  },
+  roles: [{ type: Schema.Types.ObjectId, ref: 'Role' }],
+  permissions: [{ type: String }],
+  isActive: { type: Boolean, default: true },
+  lastLogin: { type: Date }
 }, {
   timestamps: true
 });
@@ -60,6 +70,15 @@ UserSchema.pre<IUser>('save', async function(next) {
 // Compare password method
 UserSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
   return bcrypt.compare(candidatePassword, this.password);
+};
+
+UserSchema.methods.hasPermission = function(permission: string): boolean {
+  return this.permissions.includes(permission);
+};
+
+UserSchema.methods.hasRole = async function(roleName: string): Promise<boolean> {
+  await this.populate('roles');
+  return this.roles.some((role: any) => role.name === roleName);
 };
 
 export default mongoose.model<IUser>('User', UserSchema);

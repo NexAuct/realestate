@@ -3,34 +3,24 @@ import {
   Box,
   Container,
   Grid,
-  Card,
-  CardContent,
   Typography,
-  Button,
-  Chip,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Slider,
   Tabs,
   Tab,
   Fab,
-  Checkbox,
-  FormControlLabel,
   IconButton
 } from '@mui/material';
 import {
-  Search,
-  FilterList,
   Map,
   ViewList,
   ViewModule
 } from '@mui/icons-material';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNotification } from '../contexts/NotificationContext';
 import PropertyCard from '../components/property/PropertyCard';
 import PropertyDetails from '../components/property/PropertyDetails';
+import SearchBar from '../components/common/SearchBar';
+import FilterPanel from '../components/common/FilterPanel';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 interface Property {
   id: string;
@@ -65,6 +55,7 @@ interface Property {
 
 const PropertiesPage: React.FC = () => {
   const { t, language } = useLanguage();
+  const { showNotification } = useNotification();
   const [properties, setProperties] = useState<Property[]>([]);
   const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
@@ -110,15 +101,41 @@ const PropertiesPage: React.FC = () => {
 
   const fetchProperties = async () => {
     setLoading(true);
-    try {
-      const response = await fetch('/api/properties');
-      const data = await response.json();
-      setProperties(data.properties || []);
-    } catch (error) {
-      console.error('Failed to fetch properties:', error);
-    } finally {
-      setLoading(false);
-    }
+    // Mock data for development
+    const mockProperties: Property[] = [
+      {
+        id: '1',
+        title: 'Luxury Condo KLCC',
+        price: 1200000,
+        address: 'Jalan Ampang',
+        state: 'Kuala Lumpur',
+        district: 'KLCC',
+        propertyType: 'RESIDENTIAL',
+        listingType: 'SALE',
+        bedrooms: 3,
+        bathrooms: 2,
+        sqft: 1200,
+        parking: 2,
+        images: ['/placeholder-property.jpg'],
+        agent: {
+          id: 'agent1',
+          name: 'John Doe',
+          avatar: '/placeholder-avatar.jpg',
+          rating: 4.5,
+          phone: '+60123456789',
+          whatsapp: '60123456789'
+        },
+        features: ['Swimming Pool', 'Gym'],
+        isRizabMelayu: false,
+        isRumahMampuMilik: false,
+        isFeatured: true,
+        views: 150,
+        listedDate: '2024-01-15',
+        priceHistory: []
+      }
+    ];
+    setProperties(mockProperties);
+    setLoading(false);
   };
 
   const applyFilters = () => {
@@ -222,97 +239,31 @@ const PropertiesPage: React.FC = () => {
       <Grid container spacing={3}>
         {/* Filters Sidebar */}
         <Grid item xs={12} md={3}>
-          <Card sx={{ p: 2, position: 'sticky', top: 20 }}>
-            <Typography variant="h6" gutterBottom>
-              <FilterList sx={{ mr: 1 }} />
-              Filters
-            </Typography>
-
-            <TextField
-              fullWidth
+          <Box sx={{ mb: 2 }}>
+            <SearchBar
               placeholder="Search properties..."
+              onSearch={(query) => setFilters({ ...filters, search: query })}
               value={filters.search}
-              onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-              sx={{ mb: 2 }}
-              InputProps={{
-                startAdornment: <Search sx={{ mr: 1, color: 'text.secondary' }} />
-              }}
             />
-
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>State</InputLabel>
-              <Select
-                value={filters.state}
-                onChange={(e) => setFilters({ ...filters, state: e.target.value })}
-              >
-                <MenuItem value="">All States</MenuItem>
-                {malaysianStates.map(state => (
-                  <MenuItem key={state} value={state}>{state}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Property Type</InputLabel>
-              <Select
-                value={filters.propertyType}
-                onChange={(e) => setFilters({ ...filters, propertyType: e.target.value })}
-              >
-                <MenuItem value="">All Types</MenuItem>
-                <MenuItem value="RESIDENTIAL">Residential</MenuItem>
-                <MenuItem value="COMMERCIAL">Commercial</MenuItem>
-                <MenuItem value="INDUSTRIAL">Industrial</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Listing Type</InputLabel>
-              <Select
-                value={filters.listingType}
-                onChange={(e) => setFilters({ ...filters, listingType: e.target.value })}
-              >
-                <MenuItem value="">All Listings</MenuItem>
-                <MenuItem value="SALE">For Sale</MenuItem>
-                <MenuItem value="RENT">For Rent</MenuItem>
-                <MenuItem value="AUCTION">Auction</MenuItem>
-              </Select>
-            </FormControl>
-
-            <Typography gutterBottom>
-              Price Range: {formatCurrency(filters.priceRange[0])} - {formatCurrency(filters.priceRange[1])}
-            </Typography>
-            <Slider
-              value={filters.priceRange}
-              onChange={(_, value) => setFilters({ ...filters, priceRange: value as [number, number] })}
-              valueLabelDisplay="auto"
-              valueLabelFormat={formatCurrency}
-              min={0}
-              max={5000000}
-              step={50000}
-              sx={{ mb: 2 }}
-            />
-
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() => setFilters({
-                search: '',
-                state: '',
-                district: '',
-                propertyType: '',
-                listingType: '',
-                priceRange: [0, 5000000],
-                bedrooms: 0,
-                bathrooms: 0,
-                minSqft: 0,
-                features: [],
-                isRizabMelayu: false,
-                isRumahMampuMilik: false
-              })}
-            >
-              Reset Filters
-            </Button>
-          </Card>
+          </Box>
+          <FilterPanel
+            filters={filters}
+            onFilterChange={setFilters}
+            onReset={() => setFilters({
+              search: '',
+              state: '',
+              district: '',
+              propertyType: '',
+              listingType: '',
+              priceRange: [0, 5000000],
+              bedrooms: 0,
+              bathrooms: 0,
+              minSqft: 0,
+              features: [],
+              isRizabMelayu: false,
+              isRumahMampuMilik: false
+            })}
+          />
         </Grid>
 
         {/* Properties Grid */}
@@ -357,6 +308,8 @@ const PropertiesPage: React.FC = () => {
             ))}
           </Grid>
 
+          {loading && <LoadingSpinner message="Loading properties..." />}
+          
           {filteredProperties.length === 0 && !loading && (
             <Box sx={{ textAlign: 'center', py: 8 }}>
               <Typography variant="h6" color="text.secondary" gutterBottom>
