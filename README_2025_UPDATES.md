@@ -135,47 +135,24 @@ sequenceDiagram
 
 
 ```mermaid
-sequenceDiagram
-    participant User
-    participant System
-    participant DuitNow
-    participant FPX
-    participant CIMB
-    participant Maybank
-    participant PublicBank
-    participant HongLeong
-    participant AI_Engine
+timeline
+    title Payment & AI-enhanced Property Transaction
 
-    User->>System: Initiate payment
-    alt Choose DuitNow
-        System->>DuitNow: Generate QR Code
-        DuitNow-->>System: Payment confirmation
-    else Choose FPX
-        System->>FPX: Bank selection & redirect
-        FPX-->>System: Payment confirmation
-    end
+    section Payment Process
+        Step 1 : User initiates payment
+        Step 2 : System generates QR code or FPX redirect
+        Step 3 : User completes payment (DuitNow, FPX, bank)
+        Step 4 : System confirms payment & receipt
 
-    par Bank integrations
-        System->>CIMB: Direct API call
-        System->>Maybank: Payment processing
-        System->>PublicBank: Loan/payment handling
-        System->>HongLeong: Transaction processing
-    end
-
-    System-->>User: Show payment success & receipt
-
-    Note over User,AI_Engine: 🤖 AI features triggered after payment
-
-    System->>AI_Engine: Start negotiation assistant
-    AI_Engine-->>System: Price recommendations & bilingual scripts
-
-    System->>AI_Engine: Run fraud detection
-    AI_Engine-->>System: Risk report (title verification, price anomaly, AML compliance)
-
-    System->>AI_Engine: Get market intelligence
-    AI_Engine-->>System: Regional trends & demand prediction
-
-    System-->>User: Show AI-assisted insights
+    section AI Features After Payment
+        Step 5 : Activate negotiation assistant
+               : Generate bilingual scripts
+               : AI price recommendations
+        Step 6 : Run fraud detection
+               : Price anomaly, title verification, AML compliance
+        Step 7 : Market intelligence
+               : Regional trends & demand prediction
+        Step 8 : Show AI-assisted insights to user
 ```
 
 ### DuitNow
