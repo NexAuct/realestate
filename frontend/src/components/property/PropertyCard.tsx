@@ -85,7 +85,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     }).format(amount);
   };
 
-  const getListingTypeColor = (type: string) => {
+  const getListingTypeColor = (type: string): 'primary' | 'secondary' | 'error' | 'default' => {
     switch (type) {
       case 'SALE': return 'primary';
       case 'RENT': return 'secondary';

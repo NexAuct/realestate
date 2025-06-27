@@ -1,43 +1,31 @@
 {
-  "name": "real-estate-blockchain-mas-2025",
+  "name": "myrealestate-platform",
   "version": "2.0.0",
-  "description": "Real Estate Blockchain + Multi-Agent System for 2025 Malaysian Auction Property Market",
+  "description": "Malaysian Real Estate Blockchain + MAS Platform 2025",
   "scripts": {
     "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "frontend": "cd frontend && npm start",
-    "backend": "cd backend && npm run dev",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "build-all": "cd frontend && npm run build && cd ../backend && npm run build",
-    "test-all": "cd frontend && npm test && cd ../backend && npm test",
-    "deploy-contracts": "cd contracts && npx hardhat deploy --network polygon",
-    "start-agents": "cd backend && npm run start:agents"
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:frontend": "cd frontend && npm start",
+    "dev:backend": "cd backend && npm run dev",
+    "build-all": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && npm start",
+    "test": "cd frontend && npm test && cd ../backend && npm test"
   },
-  "keywords": [
-    "blockchain",
-    "real-estate",
-    "multi-agent-system",
-    "malaysia",
-    "auction",
-    "e-lelong",
-    "property",
-    "2025"
-  ],
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.2"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": ">=18.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-org/real-estate-blockchain-mas-2025.git"
-  },
-  "license": "MIT",
-  "author": "Malaysian PropTech Consortium",
-  "contributors": [
-    "Malaysian Government Digital Services",
-    "Blockchain Malaysia Association",
-    "Real Estate & Housing Developers Association Malaysia"
+  "keywords": [
+    "real-estate",
+    "blockchain",
+    "malaysia",
+    "auction",
+    "multi-agent-system"
   ]
 }

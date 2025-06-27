@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme }) => {
 
   const navItems = [
     { labelKey: 'Home', path: '/' },
-    { labelKey: 'Properties Marketplace', path: '/properties' },
+    { labelKey: 'Properties', path: '/properties' },
     { labelKey: 'Auctions', path: '/auctions' },
     { labelKey: 'Agents', path: '/agents' },
     { labelKey: 'About', path: '/about' },
@@ -77,7 +77,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme }) => {
               textDecoration: 'none',
             }}
           >
-            <ListItemText primary={t(item.labelKey)} />
+            <ListItemText primary={item.labelKey} />
           </ListItem>
         ))}
       </List>
@@ -106,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme }) => {
               fontWeight: 700,
             }}
           >
-            {t('brand.name')}
+            MyRealEstate
           </Typography>
 
           {!isMobile && (
@@ -129,7 +129,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDark, toggleTheme }) => {
                       },
                     }}
                   >
-                    {t(item.labelKey)}
+                    {item.labelKey}
                   </Button>
                 </motion.div>
               ))}

@@ -8,34 +8,45 @@ import EmailIcon from '@mui/icons-material/Email';
 const ContactPage: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle form submission
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      message: formData.get('message')
+    };
+    
+    // Simulate form submission
+    alert('Thank you for your message! We will get back to you soon.');
+    console.log('Form submitted:', data);
   };
 
   const contactInfo = [
     {
       icon: <LocationOnIcon fontSize="large" color="primary" />,
       title: 'Our Location',
-      details: '123 Real Estate Street, City, Country',
+      details: '123, Jalan Real Estate, Kuala Lumpur, Malaysia',
     },
     {
       icon: <PhoneIcon fontSize="large" color="primary" />,
       title: 'Phone Number',
-      details: '+1 234 567 8900',
+      details: '+60 3-1234 5678',
     },
     {
       icon: <EmailIcon fontSize="large" color="primary" />,
       title: 'Email Address',
-      details: 'contact@realestate.com',
+      details: 'info@myrealestate.my',
     },
   ];
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ py: 8 }}>
+    <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Box>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
         >
           <Typography variant="h2" component="h1" gutterBottom align="center">
             Contact Us
@@ -89,6 +100,7 @@ const ContactPage: React.FC = () => {
                       <TextField
                         required
                         fullWidth
+                        name="firstName"
                         label="First Name"
                         variant="outlined"
                       />
@@ -97,6 +109,7 @@ const ContactPage: React.FC = () => {
                       <TextField
                         required
                         fullWidth
+                        name="lastName"
                         label="Last Name"
                         variant="outlined"
                       />
@@ -105,6 +118,7 @@ const ContactPage: React.FC = () => {
                       <TextField
                         required
                         fullWidth
+                        name="email"
                         label="Email"
                         type="email"
                         variant="outlined"
@@ -114,6 +128,7 @@ const ContactPage: React.FC = () => {
                       <TextField
                         required
                         fullWidth
+                        name="phone"
                         label="Phone"
                         variant="outlined"
                       />
@@ -122,6 +137,7 @@ const ContactPage: React.FC = () => {
                       <TextField
                         required
                         fullWidth
+                        name="message"
                         label="Message"
                         multiline
                         rows={4}

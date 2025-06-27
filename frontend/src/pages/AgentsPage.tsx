@@ -186,8 +186,9 @@ const AgentsPage: React.FC = () => {
                           startIcon={<PhoneIcon />}
                           href={`tel:${agent.phone}`}
                           size="small"
+                          onClick={() => window.open(`/agents/${agent.id}`, '_self')}
                         >
-                          Call
+                          View Profile
                         </Button>
                         <Button
                           variant="outlined"
@@ -195,7 +196,7 @@ const AgentsPage: React.FC = () => {
                           href={`mailto:${agent.email}`}
                           size="small"
                         >
-                          Email
+                          Contact
                         </Button>
                       </Box>
                     </CardContent>

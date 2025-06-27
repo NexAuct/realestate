@@ -183,7 +183,11 @@ const BlogPage: React.FC = () => {
                         </Box>
                       </Box>
                       
-                      <Button variant="contained" sx={{ mt: 'auto', alignSelf: 'flex-start' }}>
+                      <Button 
+                        variant="contained" 
+                        sx={{ mt: 'auto', alignSelf: 'flex-start' }}
+                        onClick={() => window.open(`/blog/${filteredPosts[0].id}`, '_self')}
+                      >
                         Read More
                       </Button>
                     </CardContent>
@@ -256,7 +260,11 @@ const BlogPage: React.FC = () => {
                         </Typography>
                       </Box>
                       
-                      <Button variant="outlined" sx={{ mt: 2 }}>
+                      <Button 
+                        variant="outlined" 
+                        sx={{ mt: 2 }}
+                        onClick={() => window.open(`/blog/${post.id}`, '_self')}
+                      >
                         Read More
                       </Button>
                     </CardContent>
