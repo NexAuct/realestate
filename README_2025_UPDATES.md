@@ -47,33 +47,69 @@ This document outlines the comprehensive updates made to the Malaysian Real Esta
 ## 📁 File Structure Updates
 
 ### Backend
-```
-backend/src/
-├── types/
-│   └── malaysianProperty.ts          # Malaysian property type definitions
-├── models/
-│   └── Property.ts                   # Enhanced with Malaysian fields
-├── services/
-│   ├── blockchain.ts                 # 2025 compliance updates
-│   ├── agentSystem.ts               # AI-enhanced Malaysian features
-│   └── malaysianGovAPI.ts           # Government API integrations
+```mermaid
+flowchart TD
+    backend["📁 backend/"]
+    backend --> src["📁 src/"]
+
+    src --> types["📁 types/"]
+    types --> malaysianTypes["📄 malaysianProperty.ts"]
+
+    src --> models["📁 models/"]
+    models --> propertyModel["📄 Property.ts"]
+
+    src --> services["📁 services/"]
+    services --> blockchain["📄 blockchain.ts"]
+    services --> agentSystem["📄 agentSystem.ts"]
+    services --> malaysianGovAPI["📄 malaysianGovAPI.ts"]
 ```
 
 ### Frontend
-```
-frontend/src/
-├── i18n/
-│   └── translations.ts              # English/Bahasa Melayu translations
-├── contexts/
-│   └── LanguageContext.tsx          # Language management
-├── components/
-│   ├── LanguageSwitcher/            # Styled language selector
-│   ├── PropertySearch/              # Malaysian property search
-│   └── layout/
-│       └── Navbar.tsx               # Bilingual navigation
+```mermaid
+flowchart TD
+    src["📁 src/"]
+
+    src --> i18n["📁 i18n/"]
+    i18n --> translations["📄 translations.ts"]
+
+    src --> contexts["📁 contexts/"]
+    contexts --> languageContext["📄 LanguageContext.tsx"]
+
+    src --> components["📁 components/"]
+    components --> languageSwitcher["📁 LanguageSwitcher/"]
+    components --> propertySearch["📁 PropertySearch/"]
+    components --> layout["📁 layout/"]
+    layout --> navbar["📄 Navbar.tsx"]
 ```
 
 ## 🏛️ Government Compliance Features
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant RPGT_Calculator
+    participant StampDuty_Service
+    participant LandTitle_Service
+    participant LHDN_API
+    participant Estamping_API
+
+    User->>System: Submit property transaction
+    System->>RPGT_Calculator: Calculate RPGT
+    RPGT_Calculator->>LHDN_API: Fetch tax rates & exemptions
+    LHDN_API-->>RPGT_Calculator: Tax data response
+    RPGT_Calculator-->>System: RPGT amount & exemptions
+
+    System->>StampDuty_Service: Calculate stamp duty
+    StampDuty_Service->>Estamping_API: Get e-stamping rates
+    Estamping_API-->>StampDuty_Service: Rates response
+    StampDuty_Service-->>System: Stamp duty amount
+
+    System->>LandTitle_Service: Validate land title (Geran, Pajakan, Rizab Melayu)
+    LandTitle_Service-->>System: Compliance status
+
+    System-->>User: Show final tax & compliance summary
+```
 
 ### RPGT (Real Property Gains Tax)
 - **2025 Tax Rates**: Updated citizen/non-citizen/company rates
@@ -92,6 +128,8 @@ frontend/src/
 - **Hakmilik Sementara**: Temporary title management
 - **Pajakan**: Leasehold property support
 - **Rizab Melayu**: Malay Reserve land compliance
+
+
 
 ## 💰 Payment Integration
 
