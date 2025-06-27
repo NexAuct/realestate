@@ -55,6 +55,90 @@
 - **Fast Loading**: Optimized assets and lazy loading
 - **Offline Capability**: Service worker ready
 
+```mermaid
+mindmap
+  root((Comprehensive Upgrade))
+
+  🏗️ Architecture
+    Multi-layered Component Structure
+      Common
+      Property
+      Auction
+      Compliance
+      Payment
+      Dashboard
+      Mobile
+    Context-based State Management
+      Language
+      Notifications
+      Theme
+    Custom Hooks
+      WebSocket
+      LocalStorage
+    Service Layer
+      API service with error handling
+    Utility Functions
+      Formatters
+      Constants
+
+  🎨 UI/UX
+    Material-UI v5
+    Responsive Design
+    Dark/Light Theme
+    Framer Motion
+    Error Boundaries
+
+  🌐 Malaysian Localization
+    Bilingual Support
+      English
+      Bahasa Melayu
+    Currency Formatting
+      MYR locale
+    Malaysian States
+    Property Types
+      Rizab Melayu
+      Rumah Mampu Milik
+    Compliance Features
+      KYC verification
+      BNM regulations
+
+  🏠 Property Management
+    Advanced Search
+    Property Cards
+    Image Gallery
+    Favorites System
+    Price Tracking
+
+  🔨 Auction System
+    Live Bidding
+    Bid Panel
+    Auction Search
+    Status Tracking
+    Compliance Integration
+
+  💳 Payment Integration
+    Malaysian Gateways
+      FPX
+      DuitNow
+      Maybank2u
+      CIMB
+    Secure Processing
+    Transaction Tracking
+    Escrow Support
+
+  📊 Admin Dashboard
+    Real-time Analytics
+    Compliance Monitoring
+    Transaction Management
+    Multi-agent Status
+
+  📱 Mobile Optimization
+    Touch-friendly Interface
+    Responsive Navigation
+    Fast Loading
+    Offline Capability
+```
+
 ## 🔧 Technical Stack
 
 ### Frontend Technologies
