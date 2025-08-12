@@ -1,28 +1,3 @@
-{
-  "name": "malaysian-property-auction-contracts",
-  "version": "1.0.0",
-  "description": "Smart contracts for 2025 Malaysian Real Estate Auction with MAS integration",
-  "scripts": {
-    "compile": "hardhat compile",
-    "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy.js",
-    "deploy:testnet": "hardhat run scripts/deploy.js --network sepolia",
-    "deploy:mainnet": "hardhat run scripts/deploy.js --network mainnet",
-    "verify": "hardhat verify"
-  },
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "@openzeppelin/contracts": "^4.9.0",
-    "hardhat": "^2.17.0"
-  },
-  "keywords": [
-    "solidity",
-    "smart-contracts",
-    "real-estate",
-    "malaysia",
-    "auction",
-    "blockchain",
-    "mas",
-    "ai"
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2ff1694e8ce5bd81954d054ffe049078a7f26a8e42d2a86ae4116ae4f062d7cf
+size 812

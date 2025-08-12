@@ -1,21 +1,3 @@
-{
-  "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "lib": ["es2020", "dom"],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d0be3e5c38230cea907838563dd69a3a8e35c9810ea4e720134cc574bfaba936
+size 473
