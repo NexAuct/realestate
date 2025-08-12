@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Real Estate Auction Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --info: #4895ef;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #8d99ae;
+            --card-bg: #ffffff;
+            --sidebar-bg: #2b2d42;
+            --header-bg: #ffffff;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s ease;
+            padding-top: 20px;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .sidebar-header h2 i {
+            color: var(--success);
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-links li:hover, .nav-links li.active {
+            background: rgba(255,255,255,0.1);
+            border-left: 3px solid var(--success);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--header-bg);
+            padding: 15px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f0f2f5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 5px 10px;
+            width: 100%;
+            outline: none;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .notification {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .notification i {
+            font-size: 1.2rem;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--warning);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dashboard Overview Cards */
+        .overview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-icon.total {
+            background: rgba(67, 97, 238, 0.2);
+            color: var(--primary);
+        }
+
+        .card-icon.active {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+        
+        .card-icon.completed {
+            background: rgba(72, 149, 239, 0.2);
+            color: var(--info);
+        }
+        
+        .card-icon.revenue {
+            background: rgba(247, 37, 133, 0.2);
+            color: var(--warning);
+        }
+
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .trend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .trend.positive {
+            color: #4ade80;
+        }
+
+        .trend.negative {
+            color: #f87171;
+        }
+
+        /* Charts Section */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .chart-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .chart-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chart-actions button {
+            background: #f0f2f5;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .chart-actions button:hover {
+            background: #e2e6ea;
+        }
+
+        .chart-wrapper {
+            height: 300px;
+            position: relative;
+        }
+
+        /* Recent Activity */
+        .activity-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .activity-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .activity-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.bid {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--success);
+        }
+
+        .activity-icon.auction {
+            background: rgba(67, 97, 238, 0.2);
+            color: var(--primary);
+        }
+
+        .activity-icon.payment {
+            background: rgba(72, 149, 239, 0.2);
+            color: var(--info);
+        }
+
+        .activity-details {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .activity-amount {
+            font-weight: 600;
+        }
+
+        /* MongoDB Connection Status */
+        .db-status {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4ade80;
+        }
+
+        .status-indicator.connected {
+            background: #4ade80;
+        }
+
+        .status-text {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .logo-text, .sidebar .nav-text {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .overview-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fas fa-database"></i> <span class="logo-text">AuctionDB</span></h2>
+        </div>
+        <ul class="nav-links">
+            <li class="active">
+                <i class="fas fa-home"></i>
+                <span class="nav-text">Dashboard</span>
+            </li>
+            <li>
+                <i class="fas fa-gavel"></i>
+                <span class="nav-text">Auctions</span>
+            </li>
+            <li>
+                <i class="fas fa-users"></i>
+                <span class="nav-text">Bidders</span>
+            </li>
+            <li>
+                <i class="fas fa-file-contract"></i>
+                <span class="nav-text">Properties</span>
+            </li>
+            <li>
+                <i class="fas fa-chart-line"></i>
+                <span class="nav-text">Reports</span>
+            </li>
+            <li>
+                <i class="fas fa-cog"></i>
+                <span class="nav-text">Settings</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <h1>Real Estate Auction Dashboard</h1>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search auctions, properties, bidders...">
+            </div>
+            <div class="user-info">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+
+        <!-- Overview Cards -->
+        <div class="overview-cards">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Total Auctions</div>
+                        <div class="card-value">148</div>
+                    </div>
+                    <div class="card-icon total">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                </div>
+                <div class="trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>12% from last month</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Active Auctions</div>
+                        <div class="card-value">24</div>
+                    </div>
+                    <div class="card-icon active">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                </div>
+                <div class="trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>8% from last week</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Completed Auctions</div>
+                        <div class="card-value">86</div>
+                    </div>
+                    <div class="card-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="trend negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>3% from last month</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Total Revenue</div>
+                        <div class="card-value">$4.2M</div>
+                    </div>
+                    <div class="card-icon revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+                <div class="trend positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>22% from last quarter</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Monthly Auction Performance</div>
+                    <div class="chart-actions">
+                        <button>Last 30 Days</button>
+                        <button>Last 90 Days</button>
+                        <button>Year to Date</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="monthlyAuctionChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Property Distribution</div>
+                    <div class="chart-actions">
+                        <button>By Type</button>
+                        <button>By State</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="propertyDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="charts-row">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Top Bidders by Activity</div>
+                    <div class="chart-actions">
+                        <button>Top 5</button>
+                        <button>Top 10</button>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="topBiddersChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Auction Status</div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="auctionStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity-container">
+            <div class="chart-header">
+                <div class="chart-title">Recent Auction Activity</div>
+                <div class="chart-actions">
+                    <button>View All</button>
+                </div>
+            </div>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <div class="activity-icon bid">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">New bid placed</div>
+                        <div>Property: 123 Main St, New York</div>
+                    </div>
+                    <div class="activity-amount">$425,000</div>
+                    <div class="activity-time">10 min ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon auction">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">Auction started</div>
+                        <div>Property: 456 Park Ave, Chicago</div>
+                    </div>
+                    <div class="activity-time">2 hours ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon payment">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">Payment processed</div>
+                        <div>Property: 789 Ocean Dr, Miami</div>
+                    </div>
+                    <div class="activity-amount">$1,240,500</div>
+                    <div class="activity-time">5 hours ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-icon bid">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-title">New bid placed</div>
+                        <div>Property: 321 Oak St, San Francisco</div>
+                    </div>
+                    <div class="activity-amount">$895,000</div>
+                    <div class="activity-time">Yesterday</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- MongoDB Status -->
+        <div class="db-status">
+            <div class="status-indicator connected"></div>
+            <div class="status-text">Connected to MongoDB Atlas cluster: auction-prod-cluster</div>
+            <div class="status-text">Collections: 8 | Documents: 42,156</div>
+            <div class="status-text">Performance: Excellent</div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize charts when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Monthly Auction Performance Chart
+            const monthlyCtx = document.getElementById('monthlyAuctionChart').getContext('2d');
+            new Chart(monthlyCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: 'Auctions Started',
+                            data: [12, 15, 8, 14, 10, 16, 18, 14, 12, 16, 20, 22],
+                            borderColor: '#4361ee',
+                            backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Auctions Completed',
+                            data: [8, 10, 12, 9, 14, 12, 15, 18, 16, 14, 12, 20],
+                            borderColor: '#4cc9f0',
+                            backgroundColor: 'rgba(76, 201, 240, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Auctions'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Property Distribution Chart
+            const propertyCtx = document.getElementById('propertyDistributionChart').getContext('2d');
+            new Chart(propertyCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Residential', 'Commercial', 'Land', 'Industrial', 'Special Purpose'],
+                    datasets: [{
+                        label: 'Property Types',
+                        data: [45, 25, 15, 10, 5],
+                        backgroundColor: [
+                            '#4361ee',
+                            '#4cc9f0',
+                            '#4895ef',
+                            '#3f37c9',
+                            '#f72585'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+
+            // Top Bidders Chart
+            const biddersCtx = document.getElementById('topBiddersChart').getContext('2d');
+            new Chart(biddersCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['John D.', 'Sarah M.', 'Robert T.', 'Emily W.', 'Michael K.'],
+                    datasets: [{
+                        label: 'Bids Placed',
+                        data: [42, 38, 32, 28, 25],
+                        backgroundColor: [
+                            '#4361ee',
+                            '#4cc9f0',
+                            '#4895ef',
+                            '#3f37c9',
+                            '#f72585'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Bids'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Auction Status Chart
+            const statusCtx = document.getElementById('auctionStatusChart').getContext('2d');
+            new Chart(statusCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Active', 'Scheduled', 'Completed', 'Cancelled'],
+                    datasets: [{
+                        label: 'Auction Status',
+                        data: [24, 38, 86, 5],
+                        backgroundColor: [
+                            '#4cc9f0',
+                            '#4361ee',
+                            '#4895ef',
+                            '#f72585'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
